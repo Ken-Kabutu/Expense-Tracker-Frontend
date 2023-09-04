@@ -1,0 +1,60 @@
+/* ExpenseList.css */
+
+/* Style for the Expense List container */
+.expense-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Style for the Expense List heading */
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Style for the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px rgba(246, 244, 244, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  /* Style for table headers */
+  th {
+    background-color: #277dfdce;
+    color: #0a0a0a;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  /* Style for table rows */
+  tr {
+    background-color: #040404;
+  }
+  
+  /* Style for table cells (td) */
+  td {
+    padding: 10px;
+  }
+  
+  /* Style for table cells with descriptions */
+  td:nth-child(3) {
+    text-align: center;
+  }
+  
+  /* Style for table cells with currency */
+  td:nth-child(2) {
+    text-align: right;
+  }
+  
+  /* Hover effect on table rows */
+  tr:hover {
+    background-color: #d63030;
+  }
+  
