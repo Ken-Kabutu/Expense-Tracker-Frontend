@@ -1,15 +1,25 @@
+// App.jsx
 import React from 'react';
-import ExpenseEntryForm from './components/ExpenseEntryForm'; 
-import ExpenseList from './components/ExpenseList'; 
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './Navbar';
+import ExpenseEntryForm from './ExpenseEntryForm';
+import ExpenseList from './ExpenseList';
+import UserLogin from './UserLogin';
+import UserRegistration from './UserRegistration';
 
 function App() {
   return (
-    <div>
-      <h1>EXPENSE TRACKER</h1>
-      <ExpenseEntryForm /> {/* Render the ExpenseEntryForm component */}
-      <ExpenseList />
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route path="/expense-entry" component={ExpenseEntryForm} />
+          <Route path="/expense-list" component={ExpenseList} />
+          <Route path="/login" component={UserLogin} />
+          <Route path="/registration" component={UserRegistration} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
