@@ -74,4 +74,46 @@ const UserRegistration = () => {
     }
 
     };
+
+
+    
+  return (
+    <div>
+      <h2>User Registration</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          {errors.name && <p className="error">{errors.name}</p>}
+        </div>
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+        <div>
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          {errors.password && <p className="error">{errors.password}</p>}
+        </div>
+        {errors.general && <p className="error">{errors.general}</p>}
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  );
 };
