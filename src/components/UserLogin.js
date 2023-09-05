@@ -8,4 +8,12 @@ const UserLogin = () => {
     });
     
     const [errors, setErrors] = useState({});
+
+
+      // Function to handle form input changes
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
 }
