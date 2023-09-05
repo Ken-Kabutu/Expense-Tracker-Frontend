@@ -1,0 +1,31 @@
+/* Navbar.css */
+nav {
+    background-color: #0074d9; /* Blue background */
+    color: #fff; /* White text color */
+    padding: 10px;
+    border-bottom: 2px solid #001f3f; /* Darker blue border at the bottom */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease; /* Smooth text color transition */
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+    color: #ff4136; /* Red text color on hover for a contrast effect */
+  }
+  
