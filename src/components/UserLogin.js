@@ -35,4 +35,36 @@ const UserLogin = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+
+      // Function to handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+        try {
+            const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+            });
+
+            if (response.status === 200) {
+            // Login successful, redirect to dashboard or another page
+            // You can also set a state to indicate successful login
+            } else if (response.status === 401) {
+            // Handle invalid credentials
+            setErrors({ login: 'Invalid email or password' });
+            } else {
+            // Handle other errors (e.g., server error)
+            setErrors({ general: 'An error occurred during login' });
+            }
+        } catch (error) {
+            // Handle network or other errors
+            setErrors({ general: 'An error occurred. Please try again later.' });
+        }
+        }
+    };
+
 }
