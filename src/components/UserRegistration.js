@@ -117,3 +117,6 @@ const UserRegistration = () => {
     </div>
   );
 };
+
+
+export default UserRegistration;
