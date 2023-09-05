@@ -67,4 +67,36 @@ const UserLogin = () => {
         }
     };
 
-}
+
+    return (
+        <div>
+          <h2>User Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              {errors.email && <p className="error">{errors.email}</p>}
+            </div>
+            <div>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              {errors.password && <p className="error">{errors.password}</p>}
+            </div>
+            {errors.login && <p className="error">{errors.login}</p>}
+            {errors.general && <p className="error">{errors.general}</p>}
+            <button type="submit">Login</button>
+          </form>
+        </div>
+    );
+
+};
