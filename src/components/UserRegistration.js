@@ -35,6 +35,43 @@ const UserRegistration = () => {
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
+
+        // Set errors and return true if there are no errors
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+
+    // Function to handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+        try {
+            const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+            });
+
+            if (response.status === 201) {
+            // Registration successful, redirect to login or dashboard
+            // You can also set a state to indicate successful registration
+            } else if (response.status === 400) {
+            // Handle validation errors from the backend
+            const data = await response.json();
+            setErrors(data.errors);
+            } else {
+            // Handle other errors (e.g., server error)
+            setErrors({ general: 'An error occurred during registration' });
+            }
+        } catch (error) {
+            // Handle network or other errors
+            setErrors({ general: 'An error occurred. Please try again later.' });
+        }
     }
 
-}
+    };
+};
