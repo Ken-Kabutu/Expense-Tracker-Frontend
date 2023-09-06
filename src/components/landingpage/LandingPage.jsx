@@ -1,5 +1,4 @@
 import React from 'react';
-//import './LandingPage.css'; // Import your CSS file
 
 function LandingPage() {
   const landingPageStyle = {
@@ -7,7 +6,7 @@ function LandingPage() {
   };
 
   return (
-    <div className="landing-page bg-dark text-light" style={landingPageStyle}>
+    <div className="landing-page" style={landingPageStyle}>
       <header className="text-center py-5">
         <h1 className="display-4">
           Welcome to Expense Tracker

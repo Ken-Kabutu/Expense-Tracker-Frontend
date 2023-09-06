@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    
+    // You can apply your dark mode styles here
+    // For example, change the background and text colors
+    // document.body.classList.toggle('dark-mode');
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className={`navbar navbar-expand-lg ${isDarkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
       <div className="container">
         <h1 className="navbar-brand">EXPENSE TRACKER</h1>
         <button
@@ -35,6 +45,13 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+          {/* Dark Mode Toggle Button */}
+          <button
+            className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}
+            onClick={toggleDarkMode}
+          >
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
         </div>
       </div>
     </nav>
