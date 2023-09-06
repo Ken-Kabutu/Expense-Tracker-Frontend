@@ -45,31 +45,67 @@ const UserRegistration = () => {
     // Function to handle form submission
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
+    
       if (validateForm()) {
-          try {
-              const response = await fetch('/users/register', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(formData),
-              });
-  
-              if (response.status === 201) {
-                  // Successful registration
-                  // Handle redirection or set state here, perhaps show a success message or redirect user to login page
-              } else {
-                  // Handle error responses
-                  const data = await response.json();
-                  setErrors(data.errors);
-              }
-          } catch (error) {
-              // This catch block handles network errors, not HTTP errors. So if there's an issue reaching the server or if there's no network connection, it will come here.
-              setErrors({ general: 'An error occurred. Please try again later.' });
+        try {
+          const response = await fetch('/users/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          const data = await response.json();
+    
+          if (response.status === 201) {
+            // Successful registration and logged in
+            // Redirect to dashboard or main page
+            // For example, using React Router:
+            // props.history.push('/dashboard');
+          } else {
+            // Handle error responses
+            setErrors(data.errors);
           }
+        } catch (error) {
+          // Handle network errors
+          setErrors({ general: 'An error occurred. Please try again later.' });
+        }
       }
-  };
+    };
+    
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  
+  //     if (validateForm()) {
+  //         try {
+  //             const response = await fetch('/users/register', {
+  //                 method: 'POST',
+  //                 headers: {
+  //                     'Content-Type': 'application/json',
+  //                 },
+  //                 body: JSON.stringify(formData),
+  //             });
+  
+  //             if (response.status === 201) {
+  //                 // Successful registration
+  //                 // Handle redirection or set state here, perhaps show a success message or redirect user to login page
+  //             } else {
+  //               const data = await response.json();
+  //               console.log("Server response:", data); // Add this line
+  //               setErrors(data.errors);
+  //           }
+  //             //  else {
+  //             //     // Handle error responses
+  //             //     const data = await response.json();
+  //             //     setErrors(data.errors);
+  //             // }
+  //         } catch (error) {
+  //             // This catch block handles network errors, not HTTP errors. So if there's an issue reaching the server or if there's no network connection, it will come here.
+  //             setErrors({ general: 'An error occurred. Please try again later.' });
+  //         }
+  //     }
+  // };
   
 
 
@@ -86,7 +122,7 @@ const UserRegistration = () => {
             value={formData.name}
             onChange={handleChange}
           />
-          {errors.name && <p className="error">{errors.name}</p>}
+            {errors && errors.name && <p className="error">{errors.name}</p>}
         </div>
         <div>
           <label>Email</label>
