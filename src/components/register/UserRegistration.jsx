@@ -44,36 +44,33 @@ const UserRegistration = () => {
 
     // Function to handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (validateForm()) {
-        try {
-            const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-            });
-
-            if (response.status === 201) {
-            // Registration successful, redirect to login or dashboard
-            // You can also set a state to indicate successful registration
-            } else if (response.status === 400) {
-            // Handle validation errors from the backend
-            const data = await response.json();
-            setErrors(data.errors);
-            } else {
-            // Handle other errors (e.g., server error)
-            setErrors({ general: 'An error occurred during registration' });
-            }
-        } catch (error) {
-            // Handle network or other errors
-            setErrors({ general: 'An error occurred. Please try again later.' });
-        }
-    }
-
-    };
+      e.preventDefault();
+  
+      if (validateForm()) {
+          try {
+              const response = await fetch('/users/register', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(formData),
+              });
+  
+              if (response.status === 201) {
+                  // Successful registration
+                  // Handle redirection or set state here, perhaps show a success message or redirect user to login page
+              } else {
+                  // Handle error responses
+                  const data = await response.json();
+                  setErrors(data.errors);
+              }
+          } catch (error) {
+              // This catch block handles network errors, not HTTP errors. So if there's an issue reaching the server or if there's no network connection, it will come here.
+              setErrors({ general: 'An error occurred. Please try again later.' });
+          }
+      }
+  };
+  
 
 
     
@@ -120,3 +117,5 @@ const UserRegistration = () => {
 
 
 export default UserRegistration;
+
+
