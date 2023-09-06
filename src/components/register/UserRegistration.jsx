@@ -78,43 +78,46 @@ const UserRegistration = () => {
 
     
   return (
-    <div>
-      <h2>User Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          {errors.name && <p className="error">{errors.name}</p>}
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p className="error">{errors.email}</p>}
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          {errors.password && <p className="error">{errors.password}</p>}
-        </div>
-        {errors.general && <p className="error">{errors.general}</p>}
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <div className="container">
+    <h2>User Registration</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label className="form-label">Name</label>
+        <input
+          type="text"
+          className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Email</label>
+        <input
+          type="email"
+          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Password</label>
+        <input
+          type="password"
+          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+      </div>
+      {errors.general && <div className="alert alert-danger">{errors.general}</div>}
+      <button type="submit" className="btn btn-primary">Register</button>
+    </form>
+  </div>
   );
 };
 
