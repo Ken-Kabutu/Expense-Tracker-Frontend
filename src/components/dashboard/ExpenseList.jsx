@@ -15,29 +15,29 @@ function ExpenseList() {
     }, []);
 
   return (
-    <div>
-      <h1>EXPENSE LIST</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <th>Category</th>
+    <div className="container mt-5">
+    <h1 className="mb-4">EXPENSE LIST</h1>
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenses.map((expense) => (
+          <tr key={expense.id}>
+            <td>{expense.date}</td>
+            <td>${expense.amount.toFixed(2)}</td>
+            <td>{expense.description}</td>
+            <td>{expense.expense_category.name}</td>
           </tr>
-        </thead>
-        <tbody>
-          {expenses.map((expense) => (
-            <tr key={expense.id}>
-              <td>{expense.date}</td>
-              <td>${expense.amount.toFixed(2)}</td>
-              <td>{expense.description}</td>
-              <td>{expense.expense_category.name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
+  </div>
   );
 }
 

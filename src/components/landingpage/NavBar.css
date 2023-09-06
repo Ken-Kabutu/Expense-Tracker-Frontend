@@ -1,0 +1,13 @@
+/* Navbar.css */
+.stylish-link {
+    color: #333; /* Default link color */
+    transition: color 0.3s ease; /* Smooth transition for color changes */
+  
+    /* Add more styles as needed */
+  }
+  
+  .stylish-link:hover {
+    color: #007bff; /* Link color on hover */
+    text-decoration: none; /* Remove underline on hover if needed */
+  }
+  
