@@ -17,7 +17,7 @@ const UserRegistration = () => {
 
 
   // Function to validate the registration form
-  const validateForm = () => {
+   const validateForm = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
