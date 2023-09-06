@@ -69,34 +69,36 @@ const UserLogin = () => {
 
 
     return (
-        <div>
-          <h2>User Login</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {errors.email && <p className="error">{errors.email}</p>}
-            </div>
-            <div>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              {errors.password && <p className="error">{errors.password}</p>}
-            </div>
-            {errors.login && <p className="error">{errors.login}</p>}
-            {errors.general && <p className="error">{errors.general}</p>}
-            <button type="submit">Login</button>
-          </form>
+      <div className="container">
+      <h2>User Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Email</label>
+          <input
+            type="email"
+            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && <div className="invalid-feedback">{errors.email}</div>}
         </div>
+        <div className="mb-3">
+          <label className="form-label">Password</label>
+          <input
+            type="password"
+            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+        </div>
+        {errors.login && <div className="alert alert-danger">{errors.login}</div>}
+        {errors.general && <div className="alert alert-danger">{errors.general}</div>}
+        <button type="submit" className="btn btn-primary">Login</button>
+      </form>
+    </div>
     );
 
 };

@@ -7,6 +7,9 @@ import ExpenseList from './components/dashboard/ExpenseList';
 import UserLogin from './components/register/UserLogin';
 import UserRegistration from './components/register/UserRegistration';
 import LandingPage from './components/landingpage/LandingPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 function App() {
   return (
