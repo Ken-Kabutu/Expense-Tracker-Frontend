@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ExpenseEntryForm.css'; // Import the CSS file
 
 function ExpenseEntryForm() {
   const [formData, setFormData] = useState({
@@ -9,7 +8,6 @@ function ExpenseEntryForm() {
     category: '',
   });
 
-  // State variables for validation
   const [amountError, setAmountError] = useState('');
   const [dateError, setDateError] = useState('');
 
@@ -20,7 +18,6 @@ function ExpenseEntryForm() {
       [name]: value,
     });
 
-    // Clear validation errors when input changes
     if (name === 'amount') {
       setAmountError('');
     } else if (name === 'date') {
@@ -31,20 +28,17 @@ function ExpenseEntryForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation checks
     if (formData.amount <= 0) {
       setAmountError('Amount must be greater than 0.');
       return;
     }
 
-    // Date validation
     const inputDate = new Date(formData.date);
     if (isNaN(inputDate.getTime())) {
       setDateError('Invalid date format.');
       return;
     }
 
-    // Submit data to the server
     const response = await fetch('http://127.0.0.1:3001/expenses', {
       method: 'POST',
       headers: {
@@ -55,21 +49,15 @@ function ExpenseEntryForm() {
     });
 
     if (response.ok) {
-      // Expense created successfully
-      // Optionally, you can reset the form or perform other actions.
       setFormData({
         amount: '',
         date: '',
         description: '',
         category: '',
       });
-      // You can also display a success message to the user if needed.
       alert('Expense created successfully');
     } else {
-      // Handle error scenarios.
-      // For example, you can display an error message to the user.
       alert('Error creating expense');
-      // You can also log the specific error details to the console for debugging.
       console.error('Error:', response.statusText);
     }
   };
@@ -77,51 +65,57 @@ function ExpenseEntryForm() {
   return (
     <div className="card">
       <div className="card-body">
-        <h2 className="card-title">EXPENSE ENTRY FORM </h2>
+        <h2 className="card-title">EXPENSE ENTRY FORM</h2>
         <form onSubmit={handleFormSubmit}>
-          <div className="form-group">
-            <label htmlFor="amount">Amount:</label>
+          <div className="mb-3">
+            <label htmlFor="amount" className="form-label">
+              Amount:
+            </label>
             <input
-              className="form-control"
               type="number"
-              name="amount"
+              className="form-control"
               id="amount"
+              name="amount"
               value={formData.amount}
               onChange={handleInputChange}
             />
-            {/* Display validation error message */}
-            {amountError && <div className="error-message">{amountError}</div>}
+            {amountError && <div className="text-danger">{amountError}</div>}
           </div>
-          <div className="form-group">
-            <label htmlFor="date">Date:</label>
+          <div className="mb-3">
+            <label htmlFor="date" className="form-label">
+              Date:
+            </label>
             <input
-              className="form-control"
               type="date"
-              name="date"
+              className="form-control"
               id="date"
+              name="date"
               value={formData.date}
               onChange={handleInputChange}
             />
-            {/* Display validation error message */}
-            {dateError && <div className="error-message">{dateError}</div>}
+            {dateError && <div className="text-danger">{dateError}</div>}
           </div>
-          <div className="form-group">
-            <label htmlFor="description">Description:</label>
+          <div className="mb-3">
+            <label htmlFor="description" className="form-label">
+              Description:
+            </label>
             <input
-              className="form-control"
               type="text"
-              name="description"
+              className="form-control"
               id="description"
+              name="description"
               value={formData.description}
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="category">Category:</label>
+          <div className="mb-3">
+            <label htmlFor="category" className="form-label">
+              Category:
+            </label>
             <select
-              className="form-control"
-              name="category"
+              className="form-select"
               id="category"
+              name="category"
               value={formData.category}
               onChange={handleInputChange}
             >
@@ -130,7 +124,9 @@ function ExpenseEntryForm() {
               <option value="entertainment">Entertainment</option>
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">Add Expense</button>
+          <button type="submit" className="btn btn-primary">
+            Add Expense
+          </button>
         </form>
       </div>
     </div>
