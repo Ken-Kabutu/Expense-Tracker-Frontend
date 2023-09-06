@@ -1,26 +1,31 @@
 // App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './Navbar';
-import ExpenseEntryForm from './ExpenseEntryForm';
-import ExpenseList from './ExpenseList';
-import UserLogin from './UserLogin';
-import UserRegistration from './UserRegistration';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/landingpage/NavBar'; 
+import ExpenseEntryForm from './components/dashboard/ExpenseEntryForm'; 
+import ExpenseList from './components/dashboard/ExpenseList';
+import UserLogin from './components/register/UserLogin';
+import UserRegistration from './components/register/UserRegistration';
+import LandingPage from './components/landingpage/LandingPage';
 
 function App() {
   return (
     <Router>
       <div>
         <Navbar />
-        <Switch>
-          <Route path="/expense-entry" component={ExpenseEntryForm} />
-          <Route path="/expense-list" component={ExpenseList} />
-          <Route path="/login" component={UserLogin} />
-          <Route path="/registration" component={UserRegistration} />
-        </Switch>
+        <Routes>
+        <Route path="/landingpage" element={<LandingPage />} />
+        <Route path="/expense-entry" element={<ExpenseEntryForm />} />
+        <Route path="/expense-list" element={<ExpenseList />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/registration" element={<UserRegistration />} />
+        </Routes>
       </div>
     </Router>
   );
 }
 
 export default App;
+
+
+

@@ -1,4 +1,4 @@
-/* ExpenseEntryForm.css */
+/* ExpenseEntryForm.css
 
 /* Define your CSS styles for the card and form elements here */
 .card {
@@ -27,7 +27,7 @@
   .form-control {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 4px;
     color: #020202;
     background-color: #7d7d7da3;
@@ -75,4 +75,4 @@
     margin-top: auto; /* Push the button to the bottom */
   }
  
-  
+   
