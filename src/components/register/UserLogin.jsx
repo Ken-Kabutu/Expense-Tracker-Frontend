@@ -42,7 +42,7 @@ const UserLogin = () => {
 
         if (validateForm()) {
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch('http://localhost:3000/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
