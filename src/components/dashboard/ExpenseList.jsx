@@ -7,11 +7,12 @@ function ExpenseList() {
 
   useEffect(() => {
     // Fetch expenses from the backend API when the component mounts
-    fetch('http://localhost:3000/api/expenses')
+    fetch('http://127.0.0.1:3001/expenses')
       .then((response) => response.json())
       .then((data) => setExpenses(data))
       .catch((error) => console.error('Error fetching expenses:', error));
-  }, []);
+  
+    }, []);
 
   return (
     <div>
