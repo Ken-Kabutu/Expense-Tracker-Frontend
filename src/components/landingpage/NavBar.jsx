@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDarkMode } from '../../DarkModeContext'; // Import the hook
 
 function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    
-    // You can apply your dark mode styles here
-    // For example, change the background and text colors
-    // document.body.classList.toggle('dark-mode');
-  };
+  const { isDarkMode, toggleDarkMode } = useDarkMode(); // Use the hook
 
   return (
     <nav className={`navbar navbar-expand-lg ${isDarkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
