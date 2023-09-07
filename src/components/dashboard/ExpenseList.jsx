@@ -9,13 +9,12 @@ function ExpenseList() {
       .then((response) => response.json())
       .then((data) => setExpenses(data))
       .catch((error) => console.error('Error fetching expenses:', error));
-
   }, []);
 
   return (
-    <div className="container">
-      <h1>EXPENSE LIST</h1>
-      <table className="table">
+    <div className="container mt-5">
+      <h1 className="mb-4">Expense List</h1>
+      <table className="table table-bordered">
         <thead>
           <tr>
             <th>Date</th>

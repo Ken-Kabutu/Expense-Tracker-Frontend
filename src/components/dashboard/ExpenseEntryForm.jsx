@@ -63,71 +63,73 @@ function ExpenseEntryForm() {
   };
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <h2 className="card-title">EXPENSE ENTRY FORM</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="mb-3">
-            <label htmlFor="amount" className="form-label">
-              Amount:
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="amount"
-              name="amount"
-              value={formData.amount}
-              onChange={handleInputChange}
-            />
-            {amountError && <div className="text-danger">{amountError}</div>}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="date" className="form-label">
-              Date:
-            </label>
-            <input
-              type="date"
-              className="form-control"
-              id="date"
-              name="date"
-              value={formData.date}
-              onChange={handleInputChange}
-            />
-            {dateError && <div className="text-danger">{dateError}</div>}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="description" className="form-label">
-              Description:
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="category" className="form-label">
-              Category:
-            </label>
-            <select
-              className="form-select"
-              id="category"
-              name="category"
-              value={formData.category}
-              onChange={handleInputChange}
-            >
-              <option value="food">Food</option>
-              <option value="transportation">Transportation</option>
-              <option value="entertainment">Entertainment</option>
-            </select>
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Add Expense
-          </button>
-        </form>
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-body">
+          <h2 className="card-title">Expense Entry Form</h2>
+          <form onSubmit={handleFormSubmit}>
+            <div className="mb-3">
+              <label htmlFor="amount" className="form-label">
+                Amount:
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="amount"
+                name="amount"
+                value={formData.amount}
+                onChange={handleInputChange}
+              />
+              {amountError && <div className="text-danger">{amountError}</div>}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="date" className="form-label">
+                Date:
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                id="date"
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
+              />
+              {dateError && <div className="text-danger">{dateError}</div>}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">
+                Description:
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="category" className="form-label">
+                Category:
+              </label>
+              <select
+                className="form-select"
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
+              >
+                <option value="food">Food</option>
+                <option value="transportation">Transportation</option>
+                <option value="entertainment">Entertainment</option>
+              </select>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Add Expense
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
