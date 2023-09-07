@@ -12,8 +12,8 @@ Follow the steps below to set up and run the frontend of the Expense Tracker app
 
 ### Prerequisites
 
-- Node.js (version X.X.X)
-- npm (version X.X.X)
+- Node.js (version v16.14.0)
+- npm (version 8.3.1)
 - The Expense Tracker Backend (ensure it is running)
 
 ### Installation
@@ -21,4 +21,6 @@ Follow the steps below to set up and run the frontend of the Expense Tracker app
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/expense-tracker-frontend.git
+   git clone https://github.com/Ken-Kabutu/Expense-Tracker-Frontend
+
+
