@@ -23,4 +23,9 @@ Follow the steps below to set up and run the frontend of the Expense Tracker app
    ```bash
    git clone https://github.com/Ken-Kabutu/Expense-Tracker-Frontend
 
+2. Change into the project directory:
+
+    ```bash
+    cd expense-tracker-frontend
+
 
