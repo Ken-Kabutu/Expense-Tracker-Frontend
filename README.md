@@ -46,4 +46,8 @@ The Expense Tracker frontend provides a user-friendly interface for creating exp
 
 ### Features
 
-
+* User Registration
+* User Login
+* Expense Creation
+* Expense List Viewing
+* User Logout
