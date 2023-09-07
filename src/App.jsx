@@ -8,11 +8,10 @@ import UserLogin from './components/register/UserLogin';
 import UserRegistration from './components/register/UserRegistration';
 import LandingPage from './components/landingpage/LandingPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { DarkModeProvider } from './DarkModeContext'; // Import the context
+
 
 function App() {
   return (
-    <DarkModeProvider> 
       <Router>
         <div>
           <Navbar />
@@ -25,7 +24,6 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </DarkModeProvider> 
   );
 }
 

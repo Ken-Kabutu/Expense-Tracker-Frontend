@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDarkMode } from '../../DarkModeContext'; // Import the hook
 
 function Navbar() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode(); // Use the hook
-
   return (
-    <nav className={`navbar navbar-expand-lg ${isDarkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top w-100">
       <div className="container">
         <h1 className="navbar-brand">EXPENSE TRACKER</h1>
         <button
@@ -38,13 +35,6 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          {/* Dark Mode Toggle Button */}
-          <button
-            className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}
-            onClick={toggleDarkMode}
-          >
-            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
         </div>
       </div>
     </nav>
