@@ -28,4 +28,22 @@ Follow the steps below to set up and run the frontend of the Expense Tracker app
     ```bash
     cd expense-tracker-frontend
 
+3. Install dependencies:
+
+    ```bash
+    npm install
+
+4. Start the development server:
+
+      ```bash
+    npm run dev
+
+
+### Usage
+
+The Expense Tracker frontend provides a user-friendly interface for creating expenses and viewing expense lists. You can access the application by opening it in your web browser.
+
+
+### Features
+
 
