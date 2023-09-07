@@ -51,3 +51,21 @@ The Expense Tracker frontend provides a user-friendly interface for creating exp
 * Expense Creation
 * Expense List Viewing
 * User Logout
+
+### Author
+
+
+* Kenneth Wachira
+* Maimunar omar
+* Alfred kimata
+* Faith Kamau
+* Isaiah Sikobe
+
+
+### License
+
+This project is licensed under the MIT License.
+
+### Frontend Repo
+
+* https://github.com/Ken-Kabutu/Expense-Tracker-Backend
