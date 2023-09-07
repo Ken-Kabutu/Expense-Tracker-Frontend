@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const UserLogin = () => {
     const [loginData, setLoginData] = useState({
@@ -37,38 +38,48 @@ const UserLogin = () => {
     };
 
     return (
-      <div className="container">
-      <h2>User Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-        </div>
-        {errors.login && <div className="alert alert-danger">{errors.login}</div>}
-        {errors.general && <div className="alert alert-danger">{errors.general}</div>}
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
-    </div>
+      <div className="container mt-5">
+        <h2>User Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email:
+            </label>
+            <input
+              type="email"
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              id="email"
+              name="email"
+              value={loginData.email}
+              onChange={handleChange}
+            />
+            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password:
+            </label>
+            <input
+              type="password"
+              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+              id="password"
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
+            />
+            {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+          </div>
+          {errors.login && <div className="text-danger">{errors.login}</div>}
+          {errors.general && <div className="text-danger">{errors.general}</div>}
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
+          <p className="mt-3">
+            Don't have an account? <Link to="/registration">Register here</Link>
+          </p>
+        </form>
+      </div>
     );
 };
 
 export default UserLogin;
-
