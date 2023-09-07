@@ -110,7 +110,7 @@ const UserLogin = () => {
 
     if (validateForm()) {
       try {
-        const response = await fetch('/users/login', {
+        const response = await fetch("/users/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
