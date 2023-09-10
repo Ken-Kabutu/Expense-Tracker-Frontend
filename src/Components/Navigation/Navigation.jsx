@@ -5,23 +5,27 @@ import { signout } from "../../utils/Icons";
 import { menuItems } from "../../utils/menuItems";
 import UserRegistration from "../register/UserRegistration";
 import UserLogin from "../register/UserLogin";
+import { useNavigate } from "react-router-dom";
 
 function Navigation({ active, setActive }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // New state to check logged-in status
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     setIsLoggedIn(false); // Update the state to logged out
+    navigate("/login"); // Navigate user back to the login page after signout
   };
 
   const handleLoginSuccess = useCallback(() => {
     setIsLoggedIn(true);
-  }, []);
+    navigate("/dashboard"); // Navigate user to the dashboard after successful login
+  }, [navigate]);
 
   if (!isLoggedIn) {
     return (
       <div>
         <h2>Login/Register Page</h2>
-        <UserLogin onLoginSuccess = {handleLoginSuccess}/>
+        <UserLogin onLoginSuccess={handleLoginSuccess} />
         <UserRegistration />
       </div>
     );

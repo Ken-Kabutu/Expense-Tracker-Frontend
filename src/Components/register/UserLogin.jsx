@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/globalContext";
 
 const BASE_URL = "http://localhost:3000";
+
 const UserLoginStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,7 +73,7 @@ const UserLoginStyled = styled.div`
   }
 `;
 
-const UserLogin = () => {
+const UserLogin = (props) => {
   const navigate = useNavigate();
   const { loginUser } = useGlobalContext();
 
@@ -107,8 +108,14 @@ const UserLogin = () => {
         // Redirect to the dashboard or main page.
         localStorage.setItem("userToken", data.token);
         loginUser();
+        // Notify the parent component about the successful login
+        if (props.onLoginSuccess) {
+          props.onLoginSuccess();
+        }
         // Redirect to the dashboard after successful login
+        console.log("Before navigate");
         navigate("/dashboard");
+        console.log("after navigate");
       } else {
         // Assuming backend returns an error object with specific fields.
         // If not, you might want to adapt this:
