@@ -9,6 +9,8 @@ import Navigation from "./Components/Navigation/Navigation";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
+import LandingPage from "./Components/landingpage/LandingPage";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Context
 import { useGlobalContext } from "./context/globalContext";
@@ -16,11 +18,17 @@ import { useGlobalContext } from "./context/globalContext";
 // Styles and Assets
 import bg from "./img/bg.png";
 import { MainLayout } from "./styles/Layouts";
+import Navbar from "./Components/landingpage/NavBar";
 
 function App() {
   const [active, setActive] = useState(1);
   const global = useGlobalContext();
+  // isLoggedIn state to check if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
   // For debug purpose, you can remove if not needed
   console.log(global);
 
@@ -40,12 +48,19 @@ function App() {
   const orbMemo = useMemo(() => <Orb />, []);
 
   return (
-    <AppStyled bg={bg} className="App">
-      {orbMemo}
-      <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main>
-      </MainLayout>
+    <AppStyled className="App">
+      {/* {orbMemo} */}
+      {!isLoggedIn ? (
+        <>
+          <UserLogin onLoginSuccess={handleLoginSuccess} />
+          <UserRegistration />
+        </>
+      ) : (
+        <MainLayout>
+          <Navigation active={active} setActive={setActive} />
+          <main>{displayData()}</main>
+        </MainLayout>
+      )}
     </AppStyled>
   );
 }

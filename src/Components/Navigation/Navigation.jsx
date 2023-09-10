@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import avatar from "../../img/avatar.png";
 import { signout } from "../../utils/Icons";
 import { menuItems } from "../../utils/menuItems";
+import UserRegistration from "../register/UserRegistration";
+import UserLogin from "../register/UserLogin";
 
 function Navigation({ active, setActive }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state to check logged-in status
+
+  const handleSignOut = () => {
+    setIsLoggedIn(false); // Update the state to logged out
+  };
+
+  const handleLoginSuccess = useCallback(() => {
+    setIsLoggedIn(true);
+  }, []);
+
+  if (!isLoggedIn) {
+    return (
+      <div>
+        <h2>Login/Register Page</h2>
+        <UserLogin onLoginSuccess = {handleLoginSuccess}/>
+        <UserRegistration />
+      </div>
+    );
+  }
   return (
     <NavStyled>
       <div className="user-con">
@@ -29,7 +50,7 @@ function Navigation({ active, setActive }) {
         })}
       </ul>
       <div className="bottom-nav">
-        <li>{signout} Sign Out</li>
+        <li onClick={handleSignOut}>{signout} Sign Out</li>
       </div>
     </NavStyled>
   );
