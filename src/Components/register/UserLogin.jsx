@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../context/globalContext";
 
+const BASE_URL = "http://localhost:3000";
 const UserLoginStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,6 +73,9 @@ const UserLoginStyled = styled.div`
 `;
 
 const UserLogin = () => {
+  const navigate = useNavigate();
+  const { loginUser } = useGlobalContext();
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -84,9 +90,10 @@ const UserLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({}); // clear errors before a new attempt
 
     try {
-      const response = await fetch(`${BASE_URL}/users`, {
+      const response = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,9 +103,16 @@ const UserLogin = () => {
 
       const data = await response.json();
       if (response.ok) {
-        // Save the token and user data, perhaps in a context or state, and redirect to the dashboard or main page.
+        // TODO: Save the token and user data in context/state.
+        // Redirect to the dashboard or main page.
+        localStorage.setItem("userToken", data.token);
+        loginUser();
+        // Redirect to the dashboard after successful login
+        navigate("/dashboard");
       } else {
-        setErrors(data.errors);
+        // Assuming backend returns an error object with specific fields.
+        // If not, you might want to adapt this:
+        setErrors(data.errors || { general: data.message || "Unknown error." });
       }
     } catch (error) {
       setErrors({ general: "An error occurred. Please try again later." });

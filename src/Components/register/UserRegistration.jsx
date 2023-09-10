@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 const BASE_URL = "http://localhost:3000";
+
 const UserRegistrationStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,6 +70,8 @@ const UserRegistrationStyled = styled.div`
   }
 `;
 const UserRegistration = () => {
+
+  const { loginUser } = useGlobalContext();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -116,7 +119,7 @@ const UserRegistration = () => {
 
     if (validateForm()) {
       try {
-        const response = await fetch(`${BASE_URL}/users`, {
+        const response = await fetch(`${BASE_URL}/users/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
