@@ -25,7 +25,7 @@ function Dashboard() {
   return (
     <DashboardStyled>
       <InnerLayout>
-        <h1>All Transactions</h1>
+        <h1>Dashboard</h1>
         <div className="stats-con">
           <div className="chart-con">
             <Chart />
@@ -56,15 +56,15 @@ function Dashboard() {
               Min <span>Salary</span>Max
             </h2>
             <div className="salary-item">
-              <p>${Math.min(...incomes.map((item) => item.amount))}</p>
-              <p>${Math.max(...incomes.map((item) => item.amount))}</p>
+              <p>Kshs{Math.min(...incomes.map((item) => item.amount))}</p>
+              <p>Kshs{Math.max(...incomes.map((item) => item.amount))}</p>
             </div>
             <h2 className="salary-title">
               Min <span>Expense</span>Max
             </h2>
             <div className="salary-item">
-              <p>${Math.min(...expenses.map((item) => item.amount))}</p>
-              <p>${Math.max(...expenses.map((item) => item.amount))}</p>
+              <p>Kshs{Math.min(...expenses.map((item) => item.amount))}</p>
+              <p>Kshs{Math.max(...expenses.map((item) => item.amount))}</p>
             </div>
           </div>
         </div>

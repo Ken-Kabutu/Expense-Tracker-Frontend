@@ -1,6 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 const BASE_URL = "http://localhost:3000";
+
+const SignUpLink = styled.div`
+  margin-top: 1rem;
+  a {
+    color: var(--color-green);
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 const UserRegistrationStyled = styled.div`
   display: flex;
@@ -70,8 +83,7 @@ const UserRegistrationStyled = styled.div`
   }
 `;
 const UserRegistration = () => {
-
-  const { loginUser } = useGlobalContext();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -80,13 +92,11 @@ const UserRegistration = () => {
 
   const [errors, setErrors] = useState({});
 
-  // Function to handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Function to validate the registration form
   const validateForm = () => {
     const newErrors = {};
 
@@ -108,12 +118,10 @@ const UserRegistration = () => {
       newErrors.password = "Password must be at least 6 characters";
     }
 
-    // Set errors and return true if there are no errors
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -128,18 +136,14 @@ const UserRegistration = () => {
         });
 
         if (response.status === 201) {
-          // Registration successful, redirect to login or dashboard
-          // You can also set a state to indicate successful registration
+          // TODO: Handle successful registration
         } else if (response.status === 400) {
-          // Handle validation errors from the backend
           const data = await response.json();
           setErrors(data.errors);
         } else {
-          // Handle other errors (e.g., server error)
           setErrors({ general: "An error occurred during registration" });
         }
       } catch (error) {
-        // Handle network or other errors
         setErrors({ general: "An error occurred. Please try again later." });
       }
     }
@@ -182,6 +186,10 @@ const UserRegistration = () => {
         {errors.general && <p className="error">{errors.general}</p>}
         <button type="submit">Register</button>
       </form>
+      <SignUpLink>
+        Already have an account?
+        <a onClick={() => navigate("/login")}>Login</a>
+      </SignUpLink>
     </UserRegistrationStyled>
   );
 };

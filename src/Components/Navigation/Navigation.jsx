@@ -1,42 +1,30 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import avatar from "../../img/avatar.png";
 import { signout } from "../../utils/Icons";
 import { menuItems } from "../../utils/menuItems";
-import UserRegistration from "../register/UserRegistration";
-import UserLogin from "../register/UserLogin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function Navigation({ active, setActive }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state to check logged-in status
-  const navigate = useNavigate();
-
+  const navigate = useNavigate(); // Initialize useNavigate
   const handleSignOut = () => {
-    setIsLoggedIn(false); // Update the state to logged out
-    navigate("/login"); // Navigate user back to the login page after signout
+    // Clear user state/data (This would depend on your application's structure)
+
+    // If you're using something like localStorage to store tokens:
+    // localStorage.removeItem("userToken");
+
+    // Delay the navigation by 100 milliseconds
+    setTimeout(() => {
+      navigate("/");
+    }, 100);
   };
-
-  const handleLoginSuccess = useCallback(() => {
-    setIsLoggedIn(true);
-    navigate("/dashboard"); // Navigate user to the dashboard after successful login
-  }, [navigate]);
-
-  if (!isLoggedIn) {
-    return (
-      <div>
-        <h2>Login/Register Page</h2>
-        <UserLogin onLoginSuccess={handleLoginSuccess} />
-        <UserRegistration />
-      </div>
-    );
-  }
   return (
     <NavStyled>
       <div className="user-con">
         <img src={avatar} alt="" />
         <div className="text">
           <h2>Group 8</h2>
-          <p> Wallet </p>
+          <p>Tracker</p>
         </div>
       </div>
       <ul className="menu-items">
@@ -44,7 +32,14 @@ function Navigation({ active, setActive }) {
           return (
             <li
               key={item.id}
-              onClick={() => setActive(item.id)}
+              onClick={(event) => {
+                if (item.title === "Sign Out") {
+                  event.stopPropagation(); // Add this line
+                  handleSignOut(); // Handle signout when the "Sign Out" item is clicked
+                } else {
+                  setActive(item.id);
+                }
+              }}
               className={active === item.id ? "active" : ""}
             >
               {item.icon}
@@ -53,9 +48,6 @@ function Navigation({ active, setActive }) {
           );
         })}
       </ul>
-      <div className="bottom-nav">
-        <li onClick={handleSignOut}>{signout} Sign Out</li>
-      </div>
     </NavStyled>
   );
 }

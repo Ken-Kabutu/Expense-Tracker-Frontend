@@ -5,6 +5,17 @@ import { useGlobalContext } from "../../context/globalContext";
 
 const BASE_URL = "http://localhost:3000";
 
+const SignUpLink = styled.div`
+  margin-top: 1rem;
+  a {
+    color: var(--color-green);
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 const UserLoginStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -114,7 +125,7 @@ const UserLogin = (props) => {
         }
         // Redirect to the dashboard after successful login
         console.log("Before navigate");
-        navigate("/dashboard");
+        navigate("/navigation");
         console.log("after navigate");
       } else {
         // Assuming backend returns an error object with specific fields.
@@ -150,8 +161,13 @@ const UserLogin = (props) => {
           {errors.password && <p className="error">{errors.password}</p>}
         </div>
         {errors.general && <p className="error">{errors.general}</p>}
+
         <button type="submit">Login</button>
       </form>
+      <SignUpLink>
+        Don't have an account?
+        <a onClick={() => navigate("/register")}>Sign Up</a>
+      </SignUpLink>
     </UserLoginStyled>
   );
 };
