@@ -15,7 +15,7 @@ function Navigation({ active, setActive }) {
 
     // Delay the navigation by 100 milliseconds
     setTimeout(() => {
-      navigate("/");
+      navigate("/login");
     }, 100);
   };
   return (
@@ -38,6 +38,7 @@ function Navigation({ active, setActive }) {
                   handleSignOut(); // Handle signout when the "Sign Out" item is clicked
                 } else {
                   setActive(item.id);
+                  navigate(item.link);
                 }
               }}
               className={active === item.id ? "active" : ""}

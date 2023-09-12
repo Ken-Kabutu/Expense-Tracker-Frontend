@@ -2,25 +2,25 @@ import { dashboard, expenses, logout, transactions, trend } from "./Icons";
 export const menuItems = [
   {
     id: 1,
-    icon: <i className="dashboard-icon"></i>,
     title: "Dashboard",
-    link: "/dashboard",
+    icon: dashboard,
+    link: "/",
   },
   {
     id: 2,
-    icon: <i className="income-icon"></i>,
+    icon: transactions,
     title: "Income",
     link: "/income",
   },
   {
     id: 3,
-    icon: <i className="expenses-icon"></i>,
+    icon: trend,
     title: "Expenses",
     link: "/expenses",
   },
   {
     id: 4,
-    icon: <i className="signout-icon"></i>,
+    icon: logout,
     title: "Sign Out",
     link: "/login",
   },

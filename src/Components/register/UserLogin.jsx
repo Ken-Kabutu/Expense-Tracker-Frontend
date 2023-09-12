@@ -125,7 +125,7 @@ const UserLogin = (props) => {
         }
         // Redirect to the dashboard after successful login
         console.log("Before navigate");
-        navigate("/navigation");
+        navigate("/");
         console.log("after navigate");
       } else {
         // Assuming backend returns an error object with specific fields.
