@@ -9,7 +9,16 @@ export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  // Add this line
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //var userId = localStorage.getItem("userId");
+
+  const axiosConfig = {
+    withCredentials: true,
+    // add any other default headers if needed
+    headers: {
+      userSession: localStorage.getItem("userId"),
+    },
+  };
 
   const loginUser = () => {
     setIsLoggedIn(true);
@@ -19,62 +28,87 @@ export const GlobalProvider = ({ children }) => {
     setIsLoggedIn(false);
   };
 
-  //calculate incomes
+  // Add a new income
   const addIncome = async (income) => {
-    const response = await axios
-      .post(`${BASE_URL}/incomes`, income)
-      .catch((err) => {
-        setError(err.response.data.message);
-      });
-    getIncomes();
+    try {
+      await axios.post(`${BASE_URL}/incomes`, income, axiosConfig);
+      if (isLoggedIn) {
+        getIncomes();
+      }
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
 
   const getIncomes = async () => {
-    const response = await axios.get(`${BASE_URL}/incomes`);
-    setIncomes(response.data);
-    console.log(response.data);
+    try {
+      const response = await axios.get(`${BASE_URL}/incomes`, axiosConfig);
+      setIncomes(response.data);
+      console.log(response.data);
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
+
   const deleteIncome = async (id) => {
-    const res = await axios.delete(`${BASE_URL}/incomes/${id}`);
-    getIncomes();
+    try {
+      await axios.delete(`${BASE_URL}/incomes/${id}`, axiosConfig);
+      if (isLoggedIn) {
+        getIncomes();
+      }
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
 
   const totalIncome = () => {
     let totalIncome = 0;
     incomes.forEach((income) => {
-      totalIncome = totalIncome + parseFloat(income.amount);
+      totalIncome += parseFloat(income.amount);
     });
 
     return totalIncome;
   };
 
   //calculate incomes
-  const addExpense = async (income) => {
-    const response = await axios
-      .post(`${BASE_URL}/expenses`, income)
-      .catch((err) => {
-        setError(err.response.data.message);
-      });
-    getExpenses();
+  const addExpense = async (expense) => {
+    try {
+      await axios.post(`${BASE_URL}/expenses`, expense, axiosConfig);
+      if (isLoggedIn) {
+        getExpenses();
+      }
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
 
   const getExpenses = async () => {
-    const response = await axios.get(`${BASE_URL}/expenses/`);
-    setExpenses(response.data);
-    console.log(response.data);
+    try {
+      const response = await axios.get(`${BASE_URL}/expenses/`, axiosConfig);
+      setExpenses(response.data);
+      console.log(response.data);
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
   const totalExpenses = () => {
     let totalIncome = 0;
     expenses.forEach((expense) => {
-      totalIncome = totalIncome + parseFloat(expense.amount);
+      totalIncome += parseFloat(expense.amount);
     });
 
     return totalIncome;
   };
 
   const deleteExpense = async (id) => {
-    const res = await axios.delete(`${BASE_URL}/expenses/${id}`);
-    getExpenses();
+    try {
+      await axios.delete(`${BASE_URL}/expenses/${id}`, axiosConfig);
+      if (isLoggedIn) {
+        getExpenses();
+      }
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
 
   const totalBalance = () => {
@@ -109,7 +143,7 @@ export const GlobalProvider = ({ children }) => {
         setError,
         isLoggedIn,
         loginUser,
-        logoutUser
+        logoutUser,
       }}
     >
       {children}

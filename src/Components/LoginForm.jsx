@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
 
 function LoginForm({ onLogin }) {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +15,7 @@ function LoginForm({ onLogin }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ name, password }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
@@ -29,13 +29,13 @@ function LoginForm({ onLogin }) {
   return (
     <form onSubmit={handleSubmit}>
       <FormField>
-        <Label htmlFor="username">Username</Label>
+        <Label htmlFor="name">Name</Label>
         <Input
           type="text"
-          id="username"
+          id="name"
           autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </FormField>
       <FormField>

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/globalContext";
+import { UserContext } from "../../context/UserContext";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -29,7 +30,7 @@ const UserLoginStyled = styled.div`
 
   form {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
 
@@ -88,12 +89,14 @@ const UserLogin = (props) => {
   const navigate = useNavigate();
   const { loginUser } = useGlobalContext();
 
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
+  const { setUser, user } = useContext(UserContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,7 +108,7 @@ const UserLogin = (props) => {
     setErrors({}); // clear errors before a new attempt
 
     try {
-      const response = await fetch(`${BASE_URL}/users/login`, {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,11 +116,14 @@ const UserLogin = (props) => {
         body: JSON.stringify(loginData),
       });
 
-      const data = await response.json();
       if (response.ok) {
+        const data = await response.json();
+        setUser(data.id);
+        // console.log(user);
         // TODO: Save the token and user data in context/state.
         // Redirect to the dashboard or main page.
-        localStorage.setItem("userToken", data.token);
+        //localStorage.setItem("userId", data.id);
+
         loginUser();
         // Notify the parent component about the successful login
         if (props.onLoginSuccess) {

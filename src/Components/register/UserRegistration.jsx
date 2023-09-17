@@ -127,21 +127,24 @@ const UserRegistration = () => {
 
     if (validateForm()) {
       try {
-        const response = await fetch(`${BASE_URL}/users/register`, {
+        const response = await fetch(`${BASE_URL}/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({ user: formData }), // Nest formData under "user" key
         });
 
+        const data = await response.json();
+
         if (response.status === 201) {
-          // TODO: Handle successful registration
-        } else if (response.status === 400) {
-          const data = await response.json();
-          setErrors(data.errors);
+          // TODO: Handle successful registration (like navigating to login or dashboard)
+          navigate("/login"); // for example, redirecting to login after registration
         } else {
-          setErrors({ general: "An error occurred during registration" });
+          // Display errors from the backend
+          setErrors(
+            data.errors || { general: "An unexpected error occurred." }
+          );
         }
       } catch (error) {
         setErrors({ general: "An error occurred. Please try again later." });
