@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
 import History from "../../History/History";
 import { InnerLayout } from "../../styles/Layouts";
 import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
+import { UserContext } from "../../context/UserContext";
 
 function Dashboard() {
   const {
@@ -16,11 +17,13 @@ function Dashboard() {
     getIncomes,
     getExpenses,
   } = useGlobalContext();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     getIncomes();
     getExpenses();
   }, []);
+  console.log(user);
 
   return (
     <DashboardStyled>

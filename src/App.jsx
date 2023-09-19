@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useMemo,
+  Component,
+} from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,108 +13,104 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import bg from "./img/bg.png";
-import { MainLayout, InnerLayout } from "./styles/Layouts";
 import Navigation from "./Components/Navigation/Navigation";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
-import { useGlobalContext } from "./context/globalContext";
 import Orb from "./Components/Orb/Orb";
 import UserLogin from "./Components/register/UserLogin";
 import UserRegistration from "./Components/register/UserRegistration";
+import { UserContext } from "./context/UserContext";
+import { MainLayout, InnerLayout } from "./styles/Layouts";
 
-function PrivateRoute({ children }) {
-  const global = useGlobalContext();
+function PrivateRoute({ component: Component, ...rest }) {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!global.isLoggedIn) {
-      navigate("/login");
-    }
-  }, [global.isLoggedIn, navigate]);
-
-  if (!global.isLoggedIn) {
+  if (!user) {
+    navigate("/login");
     return null;
   }
 
-  return children;
+  return <Component {...rest} />;
 }
 
 function App() {
   const [active, setActive] = useState(1);
-  const global = useGlobalContext();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // const handleLoginSuccess = () => {
-  //   setIsLoggedIn(true);
-  // };
-
-  // const displayData = () => {
-  //   switch (active) {
-  //     case 1:
-  //       return <Dashboard />;
-  //     case 2:
-  //       return <Income />;
-  //     case 3:
-  //       return <Expenses />;
-  //     case 4:
-  //       return <UserLogin />;
-  //     default:
-  //       return <Dashboard />;
-  //   }
-  // };
-
+  const { user, setUser } = useContext(UserContext);
   const orbMemo = useMemo(() => <Orb />, []);
 
-  // For debug purposes, you can remove if not needed
-  // console.log(global);
+  useEffect(() => {
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
+  // if (!user) return <UserLogin onLogin={setUser} />;
 
   return (
-    <AppStyled bg={bg}>
-      <MainLayout className="App">
-        {orbMemo}
-        <Router>
-          <Navigation
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            active={active}
-            setActive={setActive}
-          />
-
+    <Router>
+      <AppStyled bg={bg}>
+        <MainLayout className="App">
+          {orbMemo}
+          {user && (
+            <Navigation
+              user={user}
+              setUser={setUser}
+              active={active}
+              setActive={setActive}
+            />
+          )}
           <InnerLayout>
             <Routes>
-              <Route path="/login" element={<UserLogin />} />
-              <Route path="/register" element={<UserRegistration />} />
-
+              <Route
+                path="/login"
+                element={
+                  !user ? <UserLogin onLogin={setUser} /> : <Dashboard />
+                }
+              />
+              <Route
+                path="/register"
+                element={!user ? <UserRegistration /> : <Dashboard />}
+              />
               <Route
                 path="/"
                 element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
+                  user ? (
+                    <PrivateRoute component={Dashboard} />
+                  ) : (
+                    <UserLogin onLogin={setUser} />
+                  )
                 }
               />
               <Route
                 path="/income"
                 element={
-                  <PrivateRoute>
-                    <Income />
-                  </PrivateRoute>
+                  user ? (
+                    <PrivateRoute component={Income} />
+                  ) : (
+                    <UserLogin onLogin={setUser} />
+                  )
                 }
               />
               <Route
                 path="/expenses"
                 element={
-                  <PrivateRoute>
-                    <Expenses />
-                  </PrivateRoute>
+                  user ? (
+                    <PrivateRoute component={Expenses} />
+                  ) : (
+                    <UserLogin onLogin={setUser} />
+                  )
                 }
               />
             </Routes>
           </InnerLayout>
-        </Router>
-      </MainLayout>
-    </AppStyled>
+        </MainLayout>
+      </AppStyled>
+    </Router>
   );
 }
 
